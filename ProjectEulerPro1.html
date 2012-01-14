@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>ProjectEulerPro1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="assets/styles/style.css" />
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 1</h1>
+<h2 id="toc_1.1">Description</h2>
+<p>
+If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+</p>
+
+<p>
+Find the sum of all the multiples of 3 or 5 below 1000.
+</p>
+<h2 id="toc_1.2">Solution</h2>
+<p>
+A simple way is to go through all numbers form 1 to 999 and test whether they are divisible by 3 or 5.
+</p>
+
+<p>
+But the solution is too slow to run if we change the number from one thousand to one billion. To get a more efficient solution, you could calculate the sum of the numbers less than 1000 that are divisible by 3, plus the sum of the numbers less than 1000 that are divisible by 5, and subtract the sum of the numbers less than 1000 that are divisible by 15 as you have summed numbers divisible by 15 twice. The formula is showed below:
+</p>
+
+\[
+sum(n) = \sum_{i=1}^{\lfloor \frac{n}{3} \rfloor} 3i + \sum_{i=1}^{\lfloor \frac{n}{5} \rfloor} 5i - \sum_{i=1}^{\lfloor \frac{n}{15} \rfloor} 15i
+\]
+
+<p>
+At this problem, the n is 999. As you can see, the formula is likely to the inclusion-exclusion principle for two set.
+</p>
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: cpp;">
+#include &lt;iostream&gt;
+using namespace std;
+int sum(int n) {
+    return (1+n)*n*0.5;
+}
+int main() {
+    cout &lt;&lt; 3*sum(999/3) + 5*sum(999/5) - 15*sum(999/15) &lt;&lt; endl;
+    return 0;
+}
+</pre>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>
