@@ -22,6 +22,17 @@ a {
     text-decoration: none;
     padding-bottom: 1px;
 }
+
+
+a[href^="http://"], a[href^="https://"] {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFZJREFUeF59z4EJADEIQ1F36k7u5E7ZKXeUQPACJ3wK7UNokVxVk9kHnQH7bY9hbDyDhNXgjpRLqFlo4M2GgfyJHhjq8V4agfrgPQX3JtJQGbofmCHgA/nAKks+JAjFAAAAAElFTkSuQmCC) center right no-repeat;
+    background: url(//bits.wikimedia.org/skins-1.18/vector/images/external-link-ltr-icon.png?2011-09-19T16:11:40Z) center right no-repeat!ie;
+    padding-right: 13px;
+}
+/*a[href^="http://"], a[href^="https://"] {*/
+    /*background: transparent url(bg/icons.png) no-repeat scroll right -16px;*/
+    /*padding: 0 16px 0 0;*/
+/*}*/
 a:hover {
     color: #5ef;
     padding-bottom: 0;
