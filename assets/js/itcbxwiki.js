@@ -1,5 +1,6 @@
 var head = document.getElementsByTagName("head")[0];
 
+
 // Load the mathjax script
 var mathjax = document.createElement("script");
 mathjax.type = "text/javascript";
