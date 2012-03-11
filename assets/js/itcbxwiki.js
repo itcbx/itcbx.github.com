@@ -3,6 +3,7 @@ var head = document.getElementsByTagName("head")[0];
 // Load the mathjax script
 var mathjax = document.createElement("script");
 mathjax.type = "text/javascript";
+//mathjax.src = "assets/js/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
 mathjax.src = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
 head.appendChild(mathjax);
 
@@ -26,6 +27,7 @@ var syntaxHighlight = function() {
                 SyntaxHighlighter.config.strings.alert = '语法高亮器&lt;br /&gt;';
                 SyntaxHighlighter.config.strings.noBrush = '找不到下列语言的渲染器: ';
                 SyntaxHighlighter.autoloader(
+				  'python http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPython.js',
                   'js jscript javascript  http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js',
                   'php http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPhp.js',
                   'css CSS Css http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCss.js',

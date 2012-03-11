@@ -1,0 +1,133 @@
+<html>
+<head>
+    <title>ProjectEulerPro18</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="assets/styles/style.css" />
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 18</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
+</p>
+<pre>
+   3
+  7 4
+ 2 4 6
+8 5 9 3
+</pre>
+<p>
+That is, 3 + 7 + 4 + 9 = 23.
+</p>
+
+<p>
+Find the maximum total from top to bottom of the triangle below:
+</p>
+<pre>
+              75
+             95 64
+            17 47 82
+           18 35 87 10
+          20 04 82 47 65
+         19 01 23 75 03 34
+        88 02 77 73 07 63 67
+       99 65 04 28 06 16 70 92
+      41 41 26 56 83 40 80 70 33
+     41 48 72 33 47 32 37 16 94 29
+    53 71 44 65 25 43 91 52 97 51 14
+   70 11 33 28 77 73 17 78 39 68 17 57
+  91 71 52 38 17 14 91 43 58 50 27 29 48
+ 63 66 04 68 89 53 67 30 73 16 69 87 40 31
+04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
+</pre>
+<p>
+NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, <a href="http://projecteuler.net/index.php?section=problems&amp;id=67">Problem 67</a>, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+一个三角形的数列，从上到下，选择每行的一个数，行与行之间的数必须满足是相邻关系，求选出来的数的最大和。
+</p>
+
+<p>
+此题数据量较小，可以暴力求出,但是比较好的方法是用动态规划。另a[i][j]表示第i行第j列的数，其可能从a[i-1][j-1]或者a[i-1][j]得来，那么有a[i][j]=max(a[i-1][j-1],a[i-1][j]),注意处理边界情况即可。同时，如果用二维数组来存放的话，存储空间会比较大，此题可以退化成一维数据来处理。
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+triangles = """75
+95 64
+17 47 82
+18 35 87 10
+20 04 82 47 65
+19 01 23 75 03 34
+88 02 77 73 07 63 67
+99 65 04 28 06 16 70 92
+41 41 26 56 83 40 80 70 33
+41 48 72 33 47 32 37 16 94 29
+53 71 44 65 25 43 91 52 97 51 14
+70 11 33 28 77 73 17 78 39 68 17 57
+91 71 52 38 17 14 91 43 58 50 27 29 48
+63 66 04 68 89 53 67 30 73 16 69 87 40 31
+04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
+
+def maximum_total_from_top_to_bottom():
+    p = re.compile(r"\s+")
+    number = [0] + list(map(int, p.split(triangles)))
+    res = number[1]
+    row = 2
+    while True:
+        if (1+row)*row//2 + 1 &gt; len(number):
+            break
+        low = (row-1)*row//2 + 1
+        high = low - 1 + row
+        j = low - row + 1
+        number[low] += number[j]
+        if res &lt; number[low]: 
+            res = number[low]
+        i = low + 1
+        while i &lt; high:
+            number[i] += (number[j] if number[j] &gt; number[j+1] else number[j+1])
+            if res &lt; number[i]:
+                res = number[i]
+            i += 1
+            j += 1
+        number[high] += number[j]
+        if res &lt; number[high]:
+            res = number[high]
+        row += 1
+    print(number)
+    return res
+
+if __name__ == "__main__":
+    print(maximum_total_from_top_to_bottom())
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-10 22:19 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

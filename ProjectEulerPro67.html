@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>ProjectEulerPro67</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="assets/styles/style.css" />
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 67</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
+</p>
+<pre>
+   3
+  7 4
+ 2 4 6
+8 5 9 3
+</pre>
+<p>
+That is, 3 + 7 + 4 + 9 = 23.
+</p>
+
+<p>
+Find the maximum total from top to bottom in <a href="http://projecteuler.net/project/triangle.txt">triangle.txt</a> (right click and 'Save Link/Target As...'), a 15K text file containing a triangle with one-hundred rows.
+</p>
+
+<p>
+NOTE: This is a much more difficult version of <a href="http://projecteuler.net/index.php?section=problems&amp;id=18">Problem 18</a>. It is not possible to try every route to solve this problem, as there are 299 altogether! If you could check one trillion (1012) routes every second it would take over twenty billion years to check them all. There is an efficient algorithm to solve it. ;o)
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+一个三角形的数列，从上到下，选择每行的一个数，行与行之间的数必须满足是相邻关系，求选出来的数的最大和。
+</p>
+
+<p>
+此题数据量较大，必须用动态规划。另a[i][j]表示第i行第j列的数，其可能从a[i-1][j-1]或者a[i-1][j]得来，那么有a[i][j]=max(a[i-1][j-1],a[i-1][j]),注意处理边界情况即可。同时，如果用二维数组来存放的话，存储空间会比较大，此题可以退化成一维数据来处理。
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+import urllib.request
+
+def maximum_total_from_top_to_bottom():
+    triangles = urllib.request.urlopen("http://projecteuler.net/project/triangle.txt").read().decode("utf8").strip()
+    number = [0] + list(map(int, re.split(r"\s+", triangles)))
+    res = number[1]
+    row = 2
+    while True:
+        if (1+row)*row//2 + 1 &gt; len(number):
+            break
+        low = (row-1)*row//2 + 1
+        high = low - 1 + row
+        j = low - row + 1
+        number[low] += number[j]
+        if res &lt; number[low]: 
+            res = number[low]
+        i = low + 1
+        while i &lt; high:
+            number[i] += (number[j] if number[j] &gt; number[j+1] else number[j+1])
+            if res &lt; number[i]:
+                res = number[i]
+            i += 1
+            j += 1
+        number[high] += number[j]
+        if res &lt; number[high]:
+            res = number[high]
+        row += 1
+    return res
+
+if __name__ == "__main__":
+    print(maximum_total_from_top_to_bottom())
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-10 22:51 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

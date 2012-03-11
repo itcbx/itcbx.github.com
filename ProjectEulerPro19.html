@@ -1,0 +1,109 @@
+<html>
+<head>
+    <title>ProjectEulerPro19</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="assets/styles/style.css" />
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 19</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+You are given the following information, but you may prefer to do some research for yourself.
+</p>
+
+<ul>
+<li>
+1 Jan 1900 was a Monday.
+
+<li>
+Thirty days has September,
+
+<ul>
+<li>
+April, June and November.
+
+<li>
+All the rest have thirty-one,
+
+<li>
+Saving February alone,
+
+<li>
+Which has twenty-eight, rain or shine.
+
+<li>
+And on leap years, twenty-nine.
+
+</ul>
+<li>
+A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+
+</ul>
+<p>
+How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+已知1900年1月1日是星期一，求从1901年1月1日到2000年12月31日这段时间，星期天落在每个月的第一天的次数。
+</p>
+
+<p>
+因为1900年1月1日是星期一，那么从1899年12月31号往后的第n天，将n对7求余，当余数为0，代表这第n天为星期天，余数为1到6则分别代表这第n天为星期一到星期六。在计算某天为从1899年12月31号开始的第几天时，要注意到闰年的变化。
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+table = [0, 
+         0, 31, 28, 31,
+         30, 31, 30, 31,
+         31, 30, 31, 30]
+
+def count_sunday_1st_of_month_1901_2000():
+    res = 0
+    t = 1
+    for year in range(1900, 2001):
+        if ((year%100 != 0 and year%4 == 0) or 
+            (year%100 == 0 and year%400 == 0)):
+            table[3] = 29
+        else:
+            table[3] = 28
+        for i in range(1, 13):
+            t += table[i]
+            if year &gt; 1900 and t % 7 == 0:
+                res += 1
+        t += 31
+    return res
+
+if __name__ == "__main__":
+    print(count_sunday_1st_of_month_1901_2000())
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-10 23:51 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

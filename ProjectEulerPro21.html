@@ -1,0 +1,122 @@
+<html>
+<head>
+    <title>ProjectEulerPro21</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="assets/styles/style.css" />
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+
+<h1 id="toc_1">Project Euler Problem 21</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
+If d(a) = b and d(b) = a, where a != b, then a and b are an amicable pair and each of a and b are called amicable numbers.
+</p>
+
+<p>
+For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
+</p>
+
+<p>
+Evaluate the sum of all the amicable numbers under 10000.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+另d(a)表示a的所有小于它本身的因数和，如果d(a)=b且d(b)=a，同时a!=b,那么a，b称为友好数，求10000以下所有友好数的和。
+</p>
+
+<p>
+这里主要是如何快速的求d(a)的值，我们知道对于一个数N有如下表示方式：
+</p>
+\[
+N = p_{1}^{a_1} * p_{2}^{a_2} * p_{3}^{a_3} * ... 
+\]
+<p>
+\( p_{n} \)为素数，\( a_{n} \)为指数，那么d(N)可以表示为：
+</p>
+\[
+d(N) = \prod_{j=1}^{n} {\sum_{i=0}^{{a_j}} p_{j}^i} - N
+\]
+<p>
+最后要减N的原因，前面部分式子求出来的因数和包括N自己本身。
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+def prime_init(n):
+    sievebound = (n-1) // 2
+    sieve = [False] * (sievebound + 2)
+    crosslimit = (int(math.sqrt(n))-1) // 2
+    for i in range(1, crosslimit+1):
+        if not sieve[i]:
+            for j in range(2*i*(i+1), sievebound+1, 2*i+1):
+                sieve[j] = True
+    return [2]+[2*i+1 for i in range(1, sievebound+1) if not sieve[i]]
+ 
+def sum_of_divisors(n, prime):
+    res = 1
+    t = n
+    for i in prime:
+        if i * i &gt; n:
+            res *= (1 + n)
+            break
+        num = 1
+        j = 1
+        while n % i == 0:
+            n //= i
+            j *= i
+            num += j
+        res *= num
+        if n == 1:
+            break
+    return res - t
+
+if __name__ == "__main__":
+    table = [0] * 10002
+    prime = prime_init(102)
+    res = 0
+    for i in range(1, 10001):
+        if table[i] != 0:
+            a = table[i]
+        else:
+            table[i] = a = sum_of_divisors(i, prime)
+        if a &gt; 10000:
+            continue
+        if table[a] != 0:
+            b = table[a]
+        else:
+            table[a] = b = sum_of_divisors(a, prime)
+        if i == b and i &lt; a:
+            res += i + a
+    print(res)
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-11 15:11 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

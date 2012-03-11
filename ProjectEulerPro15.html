@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>ProjectEulerPro15</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="assets/styles/style.css" />
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 15</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+Starting in the top left corner of a 2*2 grid, there are 6 routes (without backtracking) to the bottom right corner.
+</p>
+
+<p>
+<img src="http://projecteuler.net/project/images/p_015.gif" />
+</p>
+
+<p>
+How many routes are there through a 20*20 grid?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+from timeit import Timer
+
+def cal_grid(n):
+    mp = list(range(2, n+2))
+    for i in range(1, n):
+        mp[i] *= 2
+        for j in range(i+1, n):
+            mp[j] += mp[j-1]
+    return mp[n-1]
+
+if __name__ == "__main__":
+    print(cal_grid(20))
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-10 01:01 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>
