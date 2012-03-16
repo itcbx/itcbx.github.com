@@ -12,7 +12,11 @@ var itcbxwiki = {
     getCSS: function(url) {
         var css = '<link rel="stylesheet" href="' + url + '" />';
         $('head').append(css);
-    }
+    },
+	loadCmt: function() {
+		cmt = '<div id="pinglunla_here"></div><a href="http://pinglun.la/" id="logo-pinglunla">评论啦</a><script type="text/javascript" src="http://static.pinglun.la/md/pinglun.la.js" charset="utf-8"></script>'
+		$('#main').append(cmt)
+	}
 };
 $(document).ready(function() {
     var syntaxHighlight = function() {
@@ -48,5 +52,7 @@ $(document).ready(function() {
             $("title").text(h1.first().text())
         }
     })()
+
+	itcbxwiki.loadCmt();
 });
 
