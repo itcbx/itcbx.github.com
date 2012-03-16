@@ -30,36 +30,6 @@ What is the largest prime factor of the number 600851475143?
 题目大意是要求600851475143的最大素因数，最简单的方法就是从小到大将该数一直除以能整除它的数。这里有些数字可以跳过，首先从2开始除的话，那么2的倍数将不用测试，因为当某数不能被2整除时，同样的其也不能被其他2的倍数所整除，所以当某数除完2后，我们可以直接从3，5，7这些奇数开始测试。另外，易知，某数能被整除的最大数不会超过某数的开方，所以我们只需测试那些小于等于某数开方的奇数即可。
 </p>
 
-<h2 id="toc_1.3">Code</h2>
-<pre class="brush: python;">
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
-
-import math
-
-def largest_prime_factor(n):
-    if n % 2 == 0:
-        last_factor = 2
-        while n % 2 == 0:
-            n //= 2
-    else:
-        last_factor = 1
-
-    factor, max_factor = 3, int(math.sqrt(n))
-
-    while n &gt; 1 and factor &lt;= max_factor:
-        if n % factor == 0:
-            last_factor = factor
-            while n % factor == 0:
-                n //= factor
-            max_factor = int(math.sqrt(n))
-        factor += 2
-
-    return last_factor if n == 1 else n
-
-if __name__ == "__main__":
-    print(largest_prime_factor(600851475143))
-</pre>
 <hr />
 <p>
 <code>History</code>: 2012-03-08 16:50 add.

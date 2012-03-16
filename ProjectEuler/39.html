@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>39</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 39</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+If p is the perimeter of a right angle triangle with integral length sides, {a,b,c}, there are exactly three solutions for p = 120.
+</p>
+
+<p>
+{20,48,52}, {24,45,51}, {30,40,50}
+</p>
+
+<p>
+For which value of p &lt;= 1000, is the number of solutions maximised?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+求某个数p(p&lt;=1000)使得以p为周长的直角三角形个数最多。
+</p>
+
+<p>
+我们可以定义一个1000大小的数组p,p[n]代表周长为n的三角形的个数，枚举直角三角形的两边，通过这两边求出斜边，从而求出相应的周长n,将p[n]加上1，最终遍历p数组，其最大值的索引即为答案。
+</p>
+
+<p>
+在枚举直角三解形的两直角边时，我们另a&lt;=b，则根据直角三角形直角边小于斜边的定义，当周长最大为1000时，a最大只能到333，因为当另b=a时，有1000-2*a=334，这是斜边所能取的最小值，a再大就会导致斜边小于a，同理b最大只能到499，因为当a取小值1时，1000-a-b=500，b再大会导致斜边小于b，同时在内层循环一但发现1000-a-b&lt;=b则可以立即跳出内层循环。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-16 20:47 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

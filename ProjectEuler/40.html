@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>40</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 40</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+An irrational decimal fraction is created by concatenating the positive integers:
+</p>
+<pre>
+0.123456789101112131415161718192021...
+</pre>
+<p>
+It can be seen that the \( 12^th \) digit of the fractional part is 1.
+</p>
+
+<p>
+If \( d_n \) represents the nth digit of the fractional part, find the value of the following expression.
+</p>
+\[
+d_{1} * d_{10} * d_{100} * d_{1000} * d_{10000} * d_{100000} * d_{1000000}
+\]
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+对于此题，可以先算出一位数的有多少个，两位数以及两位数以下共有多少个，直到六位数以及六位数以下一共有多少。则对于\( d_n \)，我们可以计算出其落在哪个区间内，扣掉该区间以前的个数，另得到的值为t，即是在该区间里的第几位，假设该区间为三位数区间，那么将t除以3的整数值加上该区间的首个数，得到的值代表所求的值在这个三位数区间的第t除以3个三位数上，t除以3的余数代表所示的值在这个三位数上的哪个位上。(注意该题不会出现余数为0的情况，若余数为0，则所求的值应该在前一个三位数的最后一位上)。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-16 21:31 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

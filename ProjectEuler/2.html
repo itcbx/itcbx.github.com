@@ -49,24 +49,6 @@ F(n)&amp;=F(n-1)+F(n-2) \\
 Got it!
 </p>
 
-<h2 id="toc_1.3">Code</h2>
-<pre class="brush: cpp;">
-#include &lt;iostream&gt;
-using namespace std;
-#define N 4000000
-int main() {
-    int a = 2, b = 8, t;
-    int sum = a;
-    while(b &lt;= N) {
-        sum += b;
-        t = a;
-        a = b;
-        b = b * 4 + t;
-    }
-    cout &lt;&lt; sum &lt;&lt; endl;
-    return 0;
-}
-</pre>
 <hr />
 <p>
 <code>History</code>:
@@ -74,9 +56,6 @@ int main() {
 <ul>
 <li>
 2012-01-14 22:47 add
-
-<li>
-2012-03-08 16:52 =4F(n-4)+F(n-6) =&gt; =4F(n-3)+F(n-6)
 
 </ul>
 

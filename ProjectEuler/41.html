@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>41</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 41</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital and is also prime.
+</p>
+
+<p>
+What is the largest n-digit pandigital prime that exists?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+求最大的一个素数，这个素数是n位数且满足刚好使用了1到n这n个数字。
+</p>
+
+<p>
+首先我们知道n最多只能到9，而因为1到9的和为45，1到8的和为36，都能被3整除，所以按上述要求的8位数跟9位数不可能是素数。所以我们从7654321开始进行全排列遍历，第一个满足是素数的数即为答案。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-16 22:21 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>
