@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>35</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 35</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+</p>
+
+<p>
+There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+</p>
+
+<p>
+How many circular primes are there below one million?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+求100万以内的循环素数的个数。
+</p>
+
+<p>
+对于每个素数，测试它的循环是否为素数，通过python的切片可以很容易的枚举循环。
+</p>
+
+<p>
+如s="197"，则有：
+</p>
+<pre>
+s[0:] + s[:0] = "197"
+s[1:] + s[:1] = "971"
+s[2:] + s[:2] = "719"
+</pre>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+def test_circular(n, sieve):
+    if n &lt; 10:
+        return True
+    sn = str(n)
+    for i in range(1, len(sn)):
+        t = int(sn[i:]+sn[:i])
+        if t % 2 == 0 or sieve[(t-1)//2]:
+            return False
+    return True
+
+def the_nums_of_circular_primes(n):
+    sievebound = (n-1) // 2
+    sieve = [False] * (sievebound + 2)
+    crosslimit = (int(math.sqrt(n))-1) // 2
+    for i in range(1, crosslimit+1):
+        if not sieve[i]:
+            for j in range(2*i*(i+1), sievebound+1, 2*i+1):
+                sieve[j] = True
+
+    res = 1
+    for i in range(1, sievebound+1):
+        if not sieve[i] and test_circular(2*i+1, sieve):
+            res += 1
+
+    return res
+
+if __name__ == "__main__":
+    #t = Timer("the_nums_of_circular_primes(1000000)", "from __main__ import the_nums_of_circular_primes")
+    #print(t.timeit(1))
+    print(the_nums_of_circular_primes(1000000))
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-14 02:13 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

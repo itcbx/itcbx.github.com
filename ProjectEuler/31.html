@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>31</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 31</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:
+</p>
+<pre>
+1p, 2p, 5p, 10p, 20p, 50p, £1 (100p) and £2 (200p).
+</pre>
+<p>
+It is possible to make £2 in the following way:
+</p>
+<pre>
+1£1 + 150p + 220p + 15p + 12p + 31p
+</pre>
+<p>
+How many different ways can £2 be made using any number of coins?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+\[
+f(i,t)=
+\begin{cases}
+0, \text{if $i &gt; N$ or $t &lt; 0$} \\
+1, \text{if $t = 0$}
+\end{cases}
+\]
+
+<hr />
+<p>
+<code>History</code>: 2012-03-15 23:58 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

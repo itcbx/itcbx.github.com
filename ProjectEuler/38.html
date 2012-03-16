@@ -1,0 +1,102 @@
+<html>
+<head>
+    <title>38</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 38</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+Take the number 192 and multiply it by each of 1, 2, and 3:
+</p>
+<pre>
+192 * 1 = 192
+192 * 2 = 384
+192 * 3 = 576
+</pre>
+<p>
+By concatenating each product we get the 1 to 9 pandigital, 192384576. We will call 192384576 the concatenated product of 192 and (1,2,3)
+</p>
+
+<p>
+The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4, and 5, giving the pandigital, 918273645, which is the concatenated product of 9 and (1,2,3,4,5).
+</p>
+
+<p>
+What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n &gt; 1?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+将某个数依次乘以1，2..n，如果得到的结果按顺序连起来刚好是由1到9组成的9位数，即题目的要求，问按种方法最大能得到哪个9位数。
+</p>
+
+<p>
+题目已给出由9乘以1，2，3，4，5组成的结果为918273645，所以要使结果比这个数大，那么肯定是由9开头的数去乘，如果是90到99，那么与后面*2，*3所的结果组成为8位数，再*4将超过9位数不符，同理可得由900到999去乘的也不符合，所以只能由9999到9000去测试，由于*2之后最高位肯定是1，所以乘的数里不能有某位上是1.
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+def test_num(num, i, j, k):
+    num = str(num)
+    if (num[0] == "0" or num[1] == "0" or
+        num[2] == "0" or num[3] == "0" or num[4] == "0"):
+        return False
+    if (num[0] == num[1] or num[0] == num[2] or
+        num[0] == num[3] or num[0] == num[4] or
+        num[1] == num[2] or num[1] == num[3] or 
+        num[1] == num[4] or num[2] == num[3] or
+        num[2] == num[4] or num[3] == num[4]):
+        return False
+    for q in num:
+        q = int(q)
+        if q == i or q == j or q == k or q == 9:
+            return False
+    return True
+
+
+def the_largest_pandigital():
+
+    for i in range(8, 1, -1):
+        for j in range(8, 1, -1):
+            if i == j: continue
+            for k in range(8, 1, -1):
+                if k == i or k == j: continue
+                num = 9000 + i*100 + j*10 + k
+                num1 = num * 2
+                if test_num(num1, i, j, k):
+                    return num*100000 + num1
+
+if __name__ == "__main__":
+    print(the_largest_pandigital())
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-14 19:27 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

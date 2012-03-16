@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title>32</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 32</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once; for example, the 5-digit number, 15234, is 1 through 5 pandigital.
+</p>
+
+<p>
+The product 7254 is unusual, as the identity, 39  186 = 7254, containing multiplicand, multiplier, and product is 1 through 9 pandigital.
+</p>
+
+<p>
+Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.
+</p>
+
+<p>
+HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+另a*b=c，满足a，b，c这三个数的每个位正好构成1到9这9个数的排列，求所有满足这一条件的c的和。
+</p>
+
+<p>
+可以通过枚举a和b来算c的值。
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+def test_num(num, i, j, k, l, m):
+    if num &gt;= 10000: return False
+    num = str(num)
+    if (num[0] == "0" or num[1] == "0" or
+        num[2] == "0" or num[3] == "0"):
+        return False
+    if (num[0] == num[1] or num[0] == num[2] or
+        num[0] == num[3] or num[1] == num[2] or
+        num[1] == num[3] or num[2] == num[3]):
+        return False
+    for q in num:
+        q = int(q)
+        if q == i or q == j or q == k or q == l or q == m:
+            return False
+    return True
+
+
+def the_sum_of_pandigital():
+    t = set()
+    for i in range(1, 10):
+        for j in range(1, 10):
+            if i == j: continue
+            for k in range(1, 10):
+                if k == i or k == j: continue
+                for l in range(1, 10):
+                    if l == i or l == j or l == k: continue
+                    for m in range(1, 10):
+                        if m == i or m == j or m == k or m == l: continue
+                        num = (100*i+10*j+k) * (10*l+m)
+                        if test_num(num, i, j, k, l, m):
+                            t.add(num)
+                        num = (1000*i+100*j+10*k+l) * m
+                        if test_num(num, i, j, k, l, m):
+                            t.add(num)
+
+    return sum(t)
+if __name__ == "__main__":
+    print(the_sum_of_pandigital())
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-14 18:25 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

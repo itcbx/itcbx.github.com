@@ -1,0 +1,123 @@
+<html>
+<head>
+    <title>27</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 27</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+Euler published the remarkable quadratic formula:
+</p>
+\[
+n^2 + n + 41
+\]
+<p>
+It turns out that the formula will produce 40 primes for the consecutive values n = 0 to 39. However, when n = 40, \( 40^2 + 40 + 41 = 40(40 + 1) + 41 \) is divisible by 41, and certainly when n = 41, \( 41^2 + 41 + 41 \) is clearly divisible by 41.
+</p>
+
+<p>
+Using computers, the incredible formula  \( n^2 - 79n + 1601 \) was discovered, which produces 80 primes for the consecutive values n = 0 to 79. The product of the coefficients, 79 and 1601, is 126479.
+</p>
+
+<p>
+Considering quadratics of the form:
+</p>
+\[
+n^2 + an + b,\ where\ |a| &lt; 1000\ and\ |b| &lt; 1000
+\]
+<p>
+where |n| is the modulus/absolute value of n
+e.g. |11| = 11 and |4| = 4
+Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+有个一式子n^2+an+b，其中|a|&lt;1000，|b|&lt;1000，当a，b确定时，连续的n(0,1,2....)可能产生的全部都是素数，求a*b的值，满足连续的n产生的素数最多。
+</p>
+
+<p>
+当n=0时，值为b，为了产生素数，所以b必须为素数。另当n=1且a&lt;0时，要使1+a+b为素数，首先要满足b&gt;-a-1。所以a从-999遍历到999，而b只需遍历1000以内的素数，且满足当a&lt;0时b&gt;-a-1。
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+def prime_init(n):
+    sievebound = (n-1) // 2
+    sieve = [False] * (sievebound + 2)
+    crosslimit = (int(math.sqrt(n))-1) // 2
+    for i in range(1, crosslimit+1):
+        if not sieve[i]:
+            for j in range(2*i*(i+1), sievebound+1, 2*i+1):
+                sieve[j] = True
+    return sieve, [2]+[2*i+1 for i in range(1, sievebound+1) if not sieve[i]]
+
+def the_product_of_the_coefficients():
+    sieve, prime = prime_init(10**6+1)
+    nums, res = 40, 41
+    for a in range(-999, 1000):
+        if a &lt; 0:
+            b = -a
+            i = 0
+            while prime[i] &lt; b:
+                i += 1
+            b = prime[i]
+            i += 1
+        else:
+            b = 2
+            i = 1
+        while b &lt; 1000:
+            tnums, n = 0, 0
+            while True:
+                t = n * n + a * n + b
+                if t == 2:
+                    n += 1
+                    tnums += 1
+                    continue
+                if t &lt;= 1 or t % 2 == 0 or sieve[(t-1)//2]:
+                    break
+                n += 1
+                tnums += 1
+
+            if tnums &gt; nums:
+                nums = tnums
+                res = a * b
+            b = prime[i]
+            i += 1
+
+    print(res)
+
+if __name__ == "__main__":
+    the_product_of_the_coefficients()
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-13 16:48 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

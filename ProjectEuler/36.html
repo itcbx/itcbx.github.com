@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>36</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 36</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+The decimal number, \( 585 = 1001001001_2 \)(binary), is palindromic in both bases.
+</p>
+
+<p>
+Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+</p>
+
+<p>
+(Please note that the palindromic number, in either base, may not include leading zeros.)
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+对于一些数，其十进制从左到右看跟从右到左看一样，且其二进制也满足这个。求所有小于一百万且满足这个条件的数的和。
+</p>
+
+<p>
+数据不大，直接遍历判断即可。用python的话，有一些方法可以减轻代码量，如另a="2345"，则a[::-1]="5432"，刚好是其翻转的字符串，而bin函数可以将一个十进制数转换为二进制数，通过这两个方法，该题目就很容易解决了。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-16 16:56 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

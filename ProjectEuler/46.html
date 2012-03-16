@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title>46</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 46</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.
+</p>
+\[
+9 = 7 + 2*1^2
+15 = 7 + 2*2^2
+21 = 3 + 2*3^2
+25 = 7 + 2*3^2
+27 = 19 + 2*2^2
+33 = 31 + 2*1^2
+\]
+<p>
+It turns out that the conjecture was false.
+</p>
+
+<p>
+What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+一些奇合数可以表示为一个素数与一个平方数的2倍的和。求最小的不能表示成这种形式的奇合数。
+</p>
+
+<p>
+假设该数小于1000000，从小到大枚举1000000以内的所有奇合数，第一个不能表示这种形式的奇合数的即是答案。
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+def prime_init(n):
+    sievebound = (n-1) // 2
+    sieve = [False] * (sievebound + 2)
+    crosslimit = (int(math.sqrt(n))-1) // 2
+    for i in range(1, crosslimit+1):
+        if not sieve[i]:
+            for j in range(2*i*(i+1), sievebound+1, 2*i+1):
+                sieve[j] = True
+    return sieve
+
+def the_smallest_res():
+
+    sieve = prime_init(1000000)
+    table = [i*i*2 for i in range(1, 708)]
+    for i in range(3, 1000000, 2):
+        if not sieve[(i-1)//2]: continue
+        l = 0
+        ok = False
+        while l &lt;= 707 and i &gt; table[l]:
+            t = i - table[l]
+            if not sieve[(t-1)//2]:
+                ok = True
+                break
+            l += 1
+        if ok == False:
+            return i
+
+if __name__ == "__main__":
+    print(the_smallest_res())
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-14 21:41 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

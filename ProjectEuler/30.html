@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>30</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 30</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:
+</p>
+\[
+1634 = 1^4 + 6^4 + 3^4 + 4^4 \\
+8208 = 8^4 + 2^4 + 0^4 + 8^4 \\
+9474 = 9^4 + 4^4 + 7^4 + 4^4
+\]
+<p>
+As \( 1 = 1^4 \) is not a sum it is not included.
+</p>
+
+<p>
+The sum of these numbers is 1634 + 8208 + 9474 = 19316.
+</p>
+
+<p>
+Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+求所有其每位上的数的5次方之和等于这个数本身的数的和。
+</p>
+
+<p>
+我们可以通过枚举每个数，测试这个数是否满足上述条件，注意到999999这个数每位上的数的5次方之和为6位数，而9999999这个数每位上的数的5次方之和仍为6位数，即7位数肯定不能满足这个条件，所以我们枚举的上限只需到\( 9^6*6 \)。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-15 23:58 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

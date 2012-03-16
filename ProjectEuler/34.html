@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>34</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 34</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
+</p>
+
+<p>
+Find the sum of all numbers which are equal to the sum of the factorial of their digits.
+</p>
+
+<p>
+Note: as 1! = 1 and 2! = 2 are not sums they are not included.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+有这么些数，它每个位上的数的阶乘相加正好等于它本身。求所有这些数的和。
+</p>
+
+<p>
+就是简单的枚举，判断是否满足上述条件。有两点要注意的地方，一个是一位数的不算，二则是上限。因为9!*7是7位数，而9!*8还是7位数，所以上限只需到9!*7即可。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-16 15:50 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

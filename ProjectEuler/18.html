@@ -1,11 +1,11 @@
 <html>
 <head>
-    <title>ProjectEulerPro18</title>
+    <title>18</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="Stylesheet" type="text/css" href="assets/styles/style.css" />
-    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
     <script>
-        var root_path = "";
+        var root_path = "../";
     </script>
 
 </head>
@@ -89,8 +89,7 @@ triangles = """75
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
 
 def maximum_total_from_top_to_bottom():
-    p = re.compile(r"\s+")
-    number = [0] + list(map(int, p.split(triangles)))
+    number = [0] + list(map(int, re.split(r"\s+", triangles)))
     res = number[1]
     row = 2
     while True:
@@ -128,6 +127,6 @@ if __name__ == "__main__":
         <div id="sidebar"></div>
         <div id="footer"></div>
     </div>
-    <script src="assets/js/itcbxwiki.js" type="text/javascript"></script>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
 </body>
 </html>

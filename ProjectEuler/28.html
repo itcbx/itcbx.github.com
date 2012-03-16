@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>28</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 28</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
+</p>
+<pre>
+21 22 23 24 25
+20  7  8  9 10
+19  6  1  2 11
+18  5  4  3 12
+17 16 15 14 13
+</pre>
+<p>
+It can be verified that the sum of the numbers on the diagonals is 101.
+</p>
+
+<p>
+What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+从1开始顺时针生成列表，参照上面的例子，当最终生成的列表大小为1001*1001时，求该列表对角线上所有数的和。
+</p>
+
+<p>
+观察可得，当列表为n*n时（n为奇数且大于1），其右上角的值为n*n，左上角为n*n-(n-1)，左下角为n*n-2(n-1)，右下角为n*n-3(n-1)，则最外层对角线4个数的和为4*n*n-6*(n-1)。
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+def the_sum_of_numbers_on_the_diagonals(n):
+    res = 0
+    for i in range(3, n+1, 2):
+        res += 4 * i * i - 6 * (i - 1)
+    print(res+1)
+
+if __name__ == "__main__":
+    the_sum_of_numbers_on_the_diagonals(1001)
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-13 17:34 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<html>
+<head>
+    <title>374</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 374</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+An integer partition of a number n is a way of writing n as a sum of positive integers.
+</p>
+
+<p>
+Partitions that differ only in the order of their summands are considered the same. A partition of n into distinct parts is a partition of n in which every part occurs at most once.
+</p>
+
+<p>
+The partitions of 5 into distinct parts are: 
+5, 4+1 and 3+2.
+</p>
+
+<p>
+Let f(n) be the maximum product of the parts of any such partition of n into distinct parts and let m(n) be the number of elements of any such partition of n with that product.
+</p>
+
+<p>
+So f(5)=6 and m(5)=2.
+</p>
+
+<p>
+For n=10 the partition with the largest product is 10=2+3+5, which gives f(10)=30 and m(10)=3. 
+And their product, f(10)·m(10) = 30·3 = 90
+</p>
+
+<p>
+It can be verified that 
+</p>
+
+<p>
+\( \sum{f(n)·m(n)} \) for \( 1 &lt;= n &lt;= 100 = 1683550844462 \).
+</p>
+
+<p>
+Find \( \sum{f(n)·m(n)} \) for \( 1 &lt;= n &lt;= 10^{14} \). 
+</p>
+
+<p>
+Give your answer modulo 982451653, the 50 millionth prime.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+<code>todo</code>
+</p>
+
+<h2 id="toc_1.3">Code</h2>
+<pre class="brush: python;">
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import math
+import re
+from timeit import Timer
+
+mod = 982451653#349898978875656
+
+def inv(x, mod):
+    if x == 1:
+        return 1
+    return inv(mod%x, mod) * (mod - mod//x) % mod 
+
+def test(n):
+    limit = 14142136
+    #limit = 14
+    frac = [0] * (limit+1)
+    frac[2] = 2
+    _sum = 2
+    for i in range(3, limit):
+        _sum += i
+        frac[i] = frac[i-1] * i % mod
+    frac[limit] = frac[limit-1] * limit % mod
+    res, l = 92, 3
+    s = 12
+    for i in range(6, limit+1):
+        res += s * i * l
+        res %= mod
+        s = (s * (i - 1)) % mod
+        l += 1
+
+    l = 4
+    s = 2*3*4 + 2*3*5 + 2*4*5 + 3*4*5
+    res += s * 3
+    for i in range(5, limit-1):
+        s = (s * (i+1) + frac[i]) % mod
+        res += s * l
+        res %= mod
+        l += 1
+
+    t1 = limit
+    l = limit - 2
+    tres = 0
+    while _sum &lt;= n:
+        tres += frac[limit] * inv(t1, mod)
+        tres %= mod
+        _sum += 1
+        t1 -= 1
+    res = (res + tres * l) % mod
+    print(res)
+
+if __name__ == "__main__":
+    test(10**14)
+</pre>
+<hr />
+<p>
+<code>History</code>: 2012-03-13 14:56 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

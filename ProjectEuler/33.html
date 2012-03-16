@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>33</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 33</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+The fraction 49/98 is a curious fraction, as an inexperienced mathematician in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
+</p>
+
+<p>
+We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+</p>
+
+<p>
+There are exactly four non-trivial examples of this type of fraction, less than one in value, and containing two digits in the numerator and denominator.
+</p>
+
+<p>
+If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+有这么些分数，其分子分母都为两位数且分数值小于1，分子的个位与分母的十位相同，将分子的个位和分母的十位去掉，所得到的分数与原分数相等。已知这样的分数共有4个，求这4个分数乘积并约成最简式后分母的值。
+</p>
+
+<p>
+根据题意易知分子分母都不能为10的倍数，所以枚举分子跟分母，判断其是否符合上述条件即可，要注意枚举时，要排除分子等于分母的情况。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-16 15:01 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>
