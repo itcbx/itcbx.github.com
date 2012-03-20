@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>50</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 50</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+The prime 41, can be written as the sum of six consecutive primes:
+</p>
+<pre>
+41 = 2 + 3 + 5 + 7 + 11 + 13
+</pre>
+<p>
+This is the longest sum of consecutive primes that adds to a prime below one-hundred.
+</p>
+
+<p>
+The longest sum of consecutive primes below one-thousand that adds to a prime, contains 21 terms, and is equal to 953.
+</p>
+
+<p>
+Which prime, below one-million, can be written as the sum of the most consecutive primes?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+求100万以内的某个素数，这个素数是最多的连续素数之和。
+</p>
+
+<p>
+可以先算出100万以内的所有素数，然后枚举长度k，代表由多少个连续的素数相加，对于每个长度k，先测试前k个素数的和，若和为素数，则满足，若和不为素数，将和减去最前面的一个素数，加上第k+1个素数，继续判断。如此循环直到找到解。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-19 20:12 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

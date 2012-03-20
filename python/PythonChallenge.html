@@ -1,0 +1,164 @@
+<html>
+<head>
+    <title>PythonChallenge</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">PythonChallenge</h1>
+
+<h2 id="toc_1.1">关于PythonChallenge网站</h2>
+<p>
+该网站主要提供了一系列的谜题，你要根据网页提供的信息（有时还要打开该网页的源代码进行查看），通过python解决，得出答案，通过答案改变url地址，以前进到下一个关卡，注意你也可以用其他语言去解决，但有时知道python的一些特性会有助于你更快的解决谜题。我将在这个页面公布我解谜的进程。
+</p>
+
+<h2 id="toc_1.2">解题</h2>
+
+<h3 id="toc_1.2.1">第0关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/0.html">warming up</a>
+</p>
+
+<p>
+第一关很简单，图片上写着2的38次方，下面提示更改url地址，通过各种方法计算得出2的38次方的值，将地址改成2的38次方的值.html，就可以进到下一个关卡。用python的话，直接<code>2**38</code>就可以得到答案。
+</p>
+
+<h3 id="toc_1.2.2">第1关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/map.html">What about making trans?</a>
+</p>
+
+<p>
+题目图片给出3个示例，K-&gt;M，O-&gt;Q，E-&gt;G，下面还给出一串看似乱码的字符。这个意思是说把这串字符进行转换，转换规则为A-&gt;C，B-&gt;D，... Y-&gt;A，Z-&gt;B，这里我们用上python的maketrans跟translate可以很容易的解决这个问题。对这串字符串进行变换之后，它会提示叫你apply on the url，于是我们对url也进行这个变换即可得到下一关的url。代码如下：
+</p>
+
+<pre class="brush: python;">
+t1 = "abcdefghijklmnopqrstuvwxyz"
+t2 = "cdefghijklmnopqrstuvwxyzab"
+_input = "g fmnc wms bgblr rpylqjyrc gr zw fylb. rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj."
+print(_input.translate(str.maketrans(t1, t2)))
+print("map".translate(str.maketrans(t1, t2)))
+</pre>
+
+<h3 id="toc_1.2.3">第2关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/ocr.html">orc</a>
+</p>
+
+<p>
+这题提示我们要查看源代码，通过查看源代码发现，其提示find rare characters in the mess below，下面是很多行的字符，将这些字符进行统计，最后字符出现次数少于10次的即所求的字符，将这些字符按顺序连接起来就是答案，所谓按顺序，是指按这些字符在那串很多行的字符里第一次出现的位置来排序。代码如下：
+</p>
+
+<pre class="brush: python;">
+import urllib.request
+import collections
+
+res = urllib.request.urlopen("http://www.pythonchallenge.com/pc/def/ocr.html").read().decode("utf8")
+res = res[res.find("&lt;!", res.find("&lt;!")+1)+5:].replace("--&gt;", "").strip()
+_dict = collections.OrderedDict()
+for c in res: _dict[c] = _dict.get(c, 0) + 1
+print(''.join(c for c in _dict if _dict[c] &lt; 10))
+</pre>
+
+<h3 id="toc_1.2.4">第3关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/equality.html">re</a>
+</p>
+
+<p>
+题目要求在源代码的一大串字符中，找所有满足要求的小写字母，这个小写字母必须满足其左右两边刚好都只有三个连续的大写字母，刚好的意思是说如果左右两边有超过三个连续的大写字母则不符合条件，所以像xXXXaXXXx这种是符合条件的，这种XXXXaXXXX这种则不符合条件。正如题目的名字一样，这题有正则表达式可以很容易的解决之。代码如下：
+</p>
+
+<pre class="brush: python;">
+import re
+
+res = urllib.request.urlopen("http://www.pythonchallenge.com/pc/def/equality.html").read().decode("utf8")
+res = res[res.find("&lt;!")+5:].replace("--&gt;", "").strip()
+print("".join(re.findall("[^A-Z][A-Z]{3}([a-z])[A-Z]{3}[^A-Z]", res)))
+</pre>
+
+<h3 id="toc_1.2.5">第4关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/linkedlist.php">follow the chain</a>
+</p>
+
+<p>
+试着点击网页中间的图片，会跳转到一个页面<a href="http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345">http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345</a> ，这个页面上写着and the next nothing is 44827，这个提示告诉我们将url后面nothing的参数改成44827，根据这个，可以编程一直改变nothing的参数访问下一个网页，注意中途网页显示的内容会变成Yes. Divide by two and keep going.这个提示我们要把当前的nothing的值除以2继续访问。到最后，网页会给出下一个url的地址。
+</p>
+
+<pre class="brush: python;">
+import re
+import urllib.request
+url = "http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing={}"
+next_nothing = "12345"
+p1 = re.compile(r"and the next nothing is (\d+)")
+p2 = re.compile(r"Yes. Divide by two and keep going.")
+while True:
+    res = urllib.request.urlopen(url.format(next_nothing)).read().decode("utf8")
+    m = p1.search(res)
+    if m:
+        next_nothing = m.group(1)
+    else:
+        m = p2.match(res)
+        if m: next_nothing = str(int(next_nothing) // 2)
+        else:
+            print("url is {}, res is {}".format(next_nothing, res))
+            break
+</pre>
+
+<h3 id="toc_1.2.6">第5关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/peak.html">peak hell</a>
+</p>
+
+<p>
+查看源代码，有一个隐藏的<a href="http://www.pythonchallenge.com/pc/def/banner.p">http://www.pythonchallenge.com/pc/def/banner.p</a> 链接，结合一个短小的提示peak hell sounds familiar，这个是说peak hell读起来像是pickle，这个就是python的对象序列化模块。于是读取那个隐藏的链接，用pickle反序列化，得到一个列表，这个列表里面又有许多个列表，每个列表里有几个元组，每个元组有两个值，第一个是个字符，第二个是个数字，这提示我们将字符按数字打印几次，注意每个列表后面要换行，最终的结果，用编辑器打开并用等宽字体显示出来很漂亮，会提示下一关的地址。
+</p>
+
+<pre class="brush: python;">
+import pickle
+import urllib.request
+import sys
+res = urllib.request.urlopen("http://www.pythonchallenge.com/pc/def/banner.p")
+obj = pickle.load(res)
+for t1 in obj:
+    for t2 in t1:
+        sys.stdout.write(t2[0]*t2[1])
+    print()
+</pre>
+
+<h3 id="toc_1.2.7">第6关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/channel.html">now there are pairs</a>
+</p>
+
+
+<hr />
+<p>
+<code>History</code>: 
+</p>
+
+<p>
+2012-03-19 23:55 add.
+</p>
+
+<p>
+2012-03-20 14:44 增加第4，5关。
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

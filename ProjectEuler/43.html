@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>43</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 43</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, but it also has a rather interesting sub-string divisibility property.
+</p>
+
+<p>
+Let \( d_1 \) be the \( 1^{st} \) digit, \( d_2 \) be the \( 2^{nd} \) digit, and so on. In this way, we note the following:
+</p>
+
+<ul>
+<li>
+\(d_2d_3d_4 = 406\) is divisible by 2
+
+<li>
+\(d_3d_4d_5 = 063\) is divisible by 3
+
+<li>
+\(d_4d_5d_6 = 63\)5 is divisible by 5
+
+<li>
+\(d_5d_6d_7 = 35\)7 is divisible by 7
+
+<li>
+\(d_6d_7d_8 = 572\) is divisible by 11
+
+<li>
+\(d_7d_8d_9 = 728\) is divisible by 13
+
+<li>
+\(d_8d_9d_{10} = 289\) is divisible by 17
+
+</ul>
+ 
+<p>
+Find the sum of all 0 to 9 pandigital numbers with this property.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+按照题意，我们有两种做法，一种是枚举所有0到9的全排列，对每一个数进行测试看是否满足条件。一种是根据条件去构造这些数，先在0到9里选3个数构造能满足被2整除的，然后再加一个数构造能满足被3整除，如此递归下去下到找到一个9位数满足上述条件，然后看0到9还有哪个数没有用到，将其放到这9位数的最前面形成10位数，即所求的一个满足条件的值，最后将所有这些值相加即可。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-17 15:37 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>
