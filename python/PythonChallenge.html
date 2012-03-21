@@ -141,6 +141,150 @@ for t1 in obj:
 <a href="http://www.pythonchallenge.com/pc/def/channel.html">now there are pairs</a>
 </p>
 
+<p>
+网页源代码提示zip，试着将网页url地址最后的html改成zip，发现确实存在这么个zip文件，打开zip文件，发现很多以数字命名的txt文件，里面有个zip文件，提示从90052开始，查看其他文件，发现里面写着类似Next nothing is xxxxx，xxxxx代表数字，问题又回到了跟第4关一样，根据提示读取下一个内容。一直往下读，最后发现文件提示收集注释，于是提取之前所读取的文件里的注释，将其打印出来，发现其用字符组成了几个字母：hockey。将这几个字母写到url上，页面提示it's in the air. look at the letters.再次观察组成hockey这几个字母的字符，发现每个字母图案都是由一个单独的字母组成的，这些字母组成是oxygen。得到答案。
+</p>
+
+<pre class="brush: python;">
+import zipfile
+import re
+p = re.compile(r"Next nothing is (\d+)")
+next_nothing = "90052"
+comments = ""
+with zipfile.ZipFile("channel.zip", "r") as myzip:
+    while True:
+        res = myzip.read("{}.txt".format(next_nothing)).decode("utf8")
+        #print(myzip.getinfo("{}.txt".format(next_nothing)).comment)
+        comments += myzip.getinfo("{}.txt".format(next_nothing)).comment.decode("utf8")
+        m = p.match(res)
+        if m:
+            next_nothing = m.group(1)
+        else:
+            break
+print(comments)
+</pre>
+
+<h3 id="toc_1.2.8">第7关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/oxygen.html">smarty</a>
+</p>
+
+<p>
+网页中只有一幅图片，这个图片中间很明显的一条灰色条，通过python的PIL图片模块读取这张图片，解析成这个灰色条的rgb值，发现这个灰色条的每个rgb是相等的，于是取每个rgb的单值，将每个值当成ascii，还原成字符，字符提示说要解析[105, 110, 116, 101, 103, 114, 105, 116, 121]这串数字，于是用同样的方法当作ascii还原成字符得到答案。注意解析灰色条时，不是把整个黑色条的rgb值全部读出来，只需读取灰色条的一行，且这一行每隔7个像素读一次即可。
+</p>
+
+<pre class="brush: python;">
+from PIL import Image
+from itertools import count
+import re
+
+pix = Image.open("oxygen.png").load()
+msg = ""
+for i in count(0, 7):
+    t = pix[i, 47]
+    if not (t[0] == t[1] == t[2]): break
+    msg += chr(t[0])
+
+print("".join(map(lambda x: chr(int(x)), re.findall("(\d+)", msg))))
+</pre>
+
+<h3 id="toc_1.2.9">第8关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/def/integrity.html">working hard?</a>
+</p>
+
+<p>
+查看源代码，发现有一个隐藏的链接，点击该链接，发现要输入用户名和密码。继续查看原来的源代码，下面有un，pw两个字符串，但是看着像乱码，看到其前辍是BZh之类的，查google发现是bz2编码，知道编码后事情就好办了。
+</p>
+
+<pre class="brush: python;">
+import bz2
+
+un =  b"BZh91AY&amp;SYA\xaf\x82\r\x00\x00\x01\x01\x80\x02\xc0\x02\x00 \x00!\x9ah3M\x07&lt;]\xc9\x14\xe1BA\x06\xbe\x084"
+pw =  b"BZh91AY&amp;SY\x94$|\x0e\x00\x00\x00\x81\x00\x03$ \x00!\x9ah3M\x13&lt;]\xc9\x14\xe1BBP\x91\xf08"
+
+print("un: ", bz2.decompress(un))
+print("pw: ", bz2.decompress(pw))
+</pre>
+
+<h3 id="toc_1.2.10">第9关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/return/good.html">connect the dots</a>
+</p>
+
+<p>
+查看源代码，提示first+second=?，而first，second分别是一组数字。看网页的图片，上面有很多黑点，网页标题是connect the dots，直接连网页图片上的点看不出什么东西，试着将first和second的那些数字当作坐标点，将其连接起来，可以看到一幅类似牛的图片，这里如果地址写成cow，会提示是公的，于是改成bull（公牛）通过。
+</p>
+
+<pre class="brush: python;">
+from PIL import Image 
+from PIL import ImageDraw
+
+image = Image.new('RGB', (500, 500))
+
+draw = ImageDraw.Draw(image) 
+draw.polygon([int(v) for v in open("first.txt").read().split(",")], fill='white') 
+draw.polygon([int(v) for v in open("second.txt").read().split(",")], fill='white')
+
+image.show()
+</pre>
+
+<h3 id="toc_1.2.11">第10关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/return/bull.html">what are you looking at?</a>
+</p>
+
+<p>
+网页提示len(a[30])=?，查看源代码，有一个隐藏链接，点开链接，里面显示a = [1, 11, 21, 1211, 111221, 很明显要根据这个规律写出第30项并求出其长度。观察这个数列，可以发现这么个规律，后一个数是对前一个数的描述，如上a[3]=1211，那么a[4]的意思就是1个1，1个2，2个1，连起来写就是111221，根据这个规律即可算出第30项的长度。
+</p>
+
+<pre class="brush: python;">
+prev = "1"
+for i in range(1, 31):
+    tmp, c, num = "", 0, None
+    for index, n in enumerate(prev):
+        if num == None: num = n
+        if n == num:
+            c += 1
+        else:
+            tmp += str(c) + num
+            num = n
+            c = 1
+    prev = tmp + str(c) + num
+
+print(len(prev))
+</pre>
+
+<h3 id="toc_1.2.12">第11关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/return/5808.html">odd even</a>
+</p>
+
+<p>
+网页给出的图片有重叠，很明显是合成照片，又网页标题提示odd even，尝试将同奇同偶的像素取出来形成一幅新的图像，发现上面用血红色写着evil，得到答案。
+</p>
+
+<pre class="brush: python;">
+from PIL import Image
+
+img = Image.open("cave.jpg")
+pix = img.load()
+even = Image.new(img.mode, (img.size[0]//2, img.size[1]//2))
+evenpix = even.load()
+
+for i in range(img.size[0]):
+    for j in range(img.size[1]):
+        if i % 2 == 0 and j % 2 == 0 or \
+           i % 2 == 1 and j % 2 == 1:
+            evenpix[i//2, j//2] = pix[i, j]
+
+even.show()
+</pre>
+
+<h3 id="toc_1.2.13">第12关</h3>
+<p>
+<a href="http://www.pythonchallenge.com/pc/return/evil.html">dealing evil</a>
+</p>
 
 <hr />
 <p>
@@ -153,6 +297,14 @@ for t1 in obj:
 
 <p>
 2012-03-20 14:44 增加第4，5关。
+</p>
+
+<p>
+2012-03-21 18:43 增加第6关。
+</p>
+
+<p>
+2012-03-21 23:09 增加第7，8，9，10，11关。
 </p>
 
         </div>
