@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>58</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 58</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+Starting with 1 and spiralling anticlockwise in the following way, a square spiral with side length 7 is formed.
+</p>
+<pre>
+37 36 35 34 33 32 31
+38 17 16 15 14 13 30
+39 18  5  4  3 12 29
+40 19  6  1  2 11 28
+41 20  7  8  9 10 27
+42 21 22 23 24 25 26
+43 44 45 46 47 48 49
+</pre>
+<p>
+It is interesting to note that the odd squares lie along the bottom right diagonal, but what is more interesting is that 8 out of the 13 numbers lying along both diagonals are prime; that is, a ratio of \( 8/13 \approx 62% \).
+</p>
+
+<p>
+If one complete new layer is wrapped around the spiral above, a square spiral with side length 9 will be formed. If this process is continued, what is the side length of the square spiral for which the ratio of primes along both diagonals first falls below 10%?
+</p>
+
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+这个矩阵的生成规律很容易看出来，第n层的最右下角那个数为\(n^2\)，其余三个数（左下，左上，右上）分别为：\(n^2-n+1\)，\(n^2-2n+2\)，\(n^2-3n+3\)。
+</p>
+
+<p>
+遍历层数，累计总的四个角数字的个数，以及四个角数字为素数的个数，对于每次遍历，判断素数占总数的百分之几，如果小于10%，则满足条件。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-24 16:27 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

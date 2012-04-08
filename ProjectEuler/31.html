@@ -34,17 +34,20 @@ How many different ways can £2 be made using any number of coins?
 </p>
 
 <h2 id="toc_1.2">Solution</h2>
+<p>
+此题其实考察的是动态规划，设f(i,v)代表当组成的面值为v且选用前i种硬币时的总数a[i]代表第i种硬币的面值。于是有：
+</p>
 \[
-f(i,t)=
+f(i,v)=
 \begin{cases}
-0, \text{if $i &gt; N$ or $t &lt; 0$} \\
-1, \text{if $t = 0$}
+f(i-1,v)+f(i,v-a[i]), \text{if $v &gt;= a[i]$} \\
+f(i-1,v), \text{if $v &lt; a[i]$}
 \end{cases}
 \]
-
-<hr />
 <p>
-<code>History</code>: 2012-03-15 23:58 add.
+根据公式写动态规划即可。
+<hr />
+<code>History</code>: 2012-03-22 20:07 add.
 </p>
 
         </div>

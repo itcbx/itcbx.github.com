@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>51</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 51</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+By replacing the \( 1^{st} \) digit of *3, it turns out that six of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
+</p>
+
+<p>
+By replacing the \( 3^{rd} \) and \( 4^{th} \) digits of 56**3 with the same digit, this 5-digit number is the first example having seven primes among the ten generated numbers, yielding the family: 56003, 56113, 56333, 56443, 56663, 56773, and 56993. Consequently 56003, being the first member of this family, is the smallest prime with this property.
+</p>
+
+<p>
+Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
+</p>
+
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+根据题意，对于每个素数，我们查找其位数上0,1,2的个数，对这3种情况分别处理一次。比如某素数上存在3个1，那么依次将这些1替换成2，3，4...9，看看替换后的数为素数的有几个，如果总的有8个，那么第一次找到的就是答案。只需查找0到1的原因是，如果从3开始查找，那么总的只有3，4，5，6，7，8，9这么7个数可以替换，即使替换完全为素数，也不能满足总的有8个的要求，所以只需查找0，1，2这3个数即可。
+</p>
+
+<p>
+另题目给出的例子上，替换完为7个素数的为5位数，那么我们可以假设替换完为8个素数的数最小的应该从6位数开始，而不需要从6位数以下的素数开始遍历。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-23 15:37 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

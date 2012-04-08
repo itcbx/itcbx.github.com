@@ -1,0 +1,187 @@
+<html>
+<head>
+    <title>54</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 54</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+In the card game poker, a hand consists of five cards and are ranked, from lowest to highest, in the following way:
+</p>
+
+<ul>
+<li>
+High Card: Highest value card.
+
+<li>
+One Pair: Two cards of the same value.
+
+<li>
+Two Pairs: Two different pairs.
+
+<li>
+Three of a Kind: Three cards of the same value.
+
+<li>
+Straight: All cards are consecutive values.
+
+<li>
+Flush: All cards of the same suit.
+
+<li>
+Full House: Three of a kind and a pair.
+
+<li>
+Four of a Kind: Four cards of the same value.
+
+<li>
+Straight Flush: All cards are consecutive values of same suit.
+
+<li>
+Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
+
+</ul>
+
+<p>
+The cards are valued in the order:
+</p>
+<pre>
+2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace.
+</pre>
+
+<p>
+If two players have the same ranked hands then the rank made up of the highest value wins; for example, a pair of eights beats a pair of fives (see example 1 below). But if two ranks tie, for example, both players have a pair of queens, then highest cards in each hand are compared (see example 4 below); if the highest cards tie then the next highest cards are compared, and so on.
+</p>
+
+<p>
+Consider the following five hands dealt to two players:
+</p>
+
+<table class='center'>
+<tr>
+<th>
+Hand
+</th>
+<th>
+Player 1
+</th>
+<th>
+Player 2
+</th>
+<th>
+Winner
+</th>
+</tr>
+<tr>
+<td>
+1
+</td>
+<td>
+5H 5C 6S 7S KD <code>Pair of Fives</code>
+</td>
+<td>
+2C 3S 8S 8D TD <code>Pair of Eights</code>
+</td>
+<td>
+Player 2
+</td>
+</tr>
+<tr>
+<td>
+2
+</td>
+<td>
+5D 8C 9S JS AC <code>Highest card Ace</code>
+</td>
+<td>
+2C 5C 7D 8S QH <code>Highest card Queen</code>
+</td>
+<td>
+Player 1
+</td>
+</tr>
+<tr>
+<td>
+3
+</td>
+<td>
+2D 9C AS AH AC <code>Three Aces</code>
+</td>
+<td>
+3D 6D 7D TD QD <code>Flush with Diamonds</code>
+</td>
+<td>
+Player 2
+</td>
+</tr>
+<tr>
+<td>
+4
+</td>
+<td>
+4D 6S 9H QH QC <code>Pair of Queens</code>
+</td>
+<td>
+3D 6D 7H QD QS <code>Pair of Queens</code>
+</td>
+<td>
+Player 1
+</td>
+</tr>
+<tr>
+<td>
+5
+</td>
+<td>
+2H 2D 4C 4D 4S <code>Full House With Three Fours</code>
+</td>
+<td>
+3C 3D 3S 9S 9D <code>Full House With Three Threes</code>
+</td>
+<td>
+Player 1
+</td>
+</tr>
+</table>
+
+<p>
+The file, <a href="http://projecteuler.net/project/poker.txt">poker.txt</a>, contains one-thousand random hands dealt to two players. Each line of the file contains ten cards (separated by a single space): the first five are Player 1's cards and the last five are Player 2's cards. You can assume that all hands are valid (no invalid characters or repeated cards), each player's hand is in no specific order, and in each hand there is a clear winner.
+</p>
+
+<p>
+How many hands does Player 1 win?
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+这题其实不算什么数学，只要按照要求去测试两人手中是什么类型的牌即可。注意应该先从价值较高的牌面开始测起，因为价值较高的牌面可能包含价值较低的牌面。
+</p>
+
+<p>
+在测试牌的值时，可以先将5张牌的值按从大到小排列好，其中为了更方便的测试连续数字的面值，这里有个小技巧，就是将<code>TJQKA</code>这5种面值替换成<code>:;&lt;=&gt;</code>，这样的原因是<code>9</code>这个字符的ascii值为57，而<code>:;&lt;=&gt;</code>则分别是58，59，60，61，62，刚好是<code>9</code>接下去的连续5个字符，这样子测试连续数字的时候，只需满足后一个的ascii值刚好比当前字符的ascii值小1即可（按从大到小顺序排列）。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-23 21:16 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

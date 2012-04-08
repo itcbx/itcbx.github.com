@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>59</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 59</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+Each character on a computer is assigned a unique code and the preferred standard is ASCII (American Standard Code for Information Interchange). For example, uppercase A = 65, asterisk (*) = 42, and lowercase k = 107.
+</p>
+
+<p>
+A modern encryption method is to take a text file, convert the bytes to ASCII, then XOR each byte with a given value, taken from a secret key. The advantage with the XOR function is that using the same encryption key on the cipher text, restores the plain text; for example, 65 XOR 42 = 107, then 107 XOR 42 = 65.
+</p>
+
+<p>
+For unbreakable encryption, the key is the same length as the plain text message, and the key is made up of random bytes. The user would keep the encrypted message and the encryption key in different locations, and without both "halves", it is impossible to decrypt the message.
+</p>
+
+<p>
+Unfortunately, this method is impractical for most users, so the modified method is to use a password as a key. If the password is shorter than the message, which is likely, the key is repeated cyclically throughout the message. The balance for this method is using a sufficiently long password key for security, but short enough to be memorable.
+</p>
+
+<p>
+Your task has been made easy, as the encryption key consists of three lower case characters. Using <a href="http://projecteuler.net/project/cipher1.txt">cipher1.txt</a> (right click and 'Save Link/Target As...'), a file containing the encrypted ASCII codes, and the knowledge that the plain text must contain common English words, decrypt the message and find the sum of the ASCII values in the original text.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+由于密码为3个小写字母的循环，所以我们可以遍历26个小写字母，对于每次循环，将密文分成三组，分别是相应位置被3除余0，被3除余1，被3除余2的数，将这三组数分别与当前遍历的小写字母的ascii值进行异或，如果得到的ascii值的结果刚好落在<code> !\"'(),-.0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</code>这些字母的ascii中的一个（注意前面有个空格），那么则符合条件。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-24 17:32 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>

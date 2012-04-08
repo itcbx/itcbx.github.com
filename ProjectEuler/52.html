@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>52</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Stylesheet" type="text/css" href="../assets/styles/style.css" />
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script>
+        var root_path = "../";
+    </script>
+
+</head>
+<body>
+    <div id="all">
+        <div id="header"></div>
+        <div id="main">
+            
+<h1 id="toc_1">Project Euler Problem 52</h1>
+
+<h2 id="toc_1.1">Description</h2>
+<p>
+It can be seen that the number, 125874, and its double, 251748, contain exactly the same digits, but in a different order.
+</p>
+
+<p>
+Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
+</p>
+
+<h2 id="toc_1.2">Solution</h2>
+<p>
+对于每个数，用一个大小于10的数组存储其每位上的数字的出现次数，然后测试其2倍3倍...6倍的构成是否跟它一样，如果一样，则第一次找到的值为答案。
+</p>
+
+<p>
+注意到测试的时候，必须满足这6个数的位数一样，那就是说，x，即第一个数，其最高位必须为1，因为如果大于等于2，那么6x的位数肯定大于x，这样子肯定不满足。
+</p>
+
+<hr />
+<p>
+<code>History</code>: 2012-03-23 16:52 add.
+</p>
+
+        </div>
+        <div id="sidebar"></div>
+        <div id="footer"></div>
+    </div>
+    <script src="../assets/js/itcbxwiki.js" type="text/javascript"></script>
+</body>
+</html>
